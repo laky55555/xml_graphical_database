@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOCIAL_NETWORK>
+    <PERSON>
+        <PERSON_ID>PersonID1</PERSON_ID>
+        <CREATION_DATE>27-10-2016</CREATION_DATE>
+        <FIRST_NAME>Johny</FIRST_NAME>
+        <LAST_NAME>Deep</LAST_NAME>
+        <GENDER>MALE</GENDER>
+        <BIRTHDAY>18-12-1980</BIRTHDAY>
+        <EMAIL>
+            <NO>moje@ime.com</NO>
+            <NO>moje.ime@ime.com</NO>
+        </EMAIL>
+        <SPEAKS>
+            <NO>English</NO>
+            <NO>Polish</NO>
+        </SPEAKS>
+        <BROWSER>FireFox</BROWSER>
+        <IP>154.124.135.2</IP>
+        <LOCATION>CityID1</LOCATION>
+        <KNOWS>
+            <PERSON_ID>PersonID2</PERSON_ID>
+        </KNOWS>
+        <STUDY_AT>
+            <NO>
+                <CLASS_YEAR>2015</CLASS_YEAR>
+                <UNIVERSITY_ID>UniversityID1</UNIVERSITY_ID>
+            </NO>
+        </STUDY_AT>
+    </PERSON>
+    <PERSON>
+        <PERSON_ID>PersonID2</PERSON_ID>
+        <CREATION_DATE>27-10-2016</CREATION_DATE>
+        <FIRST_NAME>Natalie</FIRST_NAME>
+        <LAST_NAME>Dormer</LAST_NAME>
+        <GENDER>FEMALE</GENDER>
+        <BIRTHDAY>11-12-1985</BIRTHDAY>
+        <EMAIL>
+            <NO>natalie@dormer.com</NO>
+        </EMAIL>
+        <SPEAKS>
+            <NO>English</NO>
+            <NO>Croatian</NO>
+        </SPEAKS>
+        <BROWSER>FireFox</BROWSER>
+        <IP>114.126.175.45</IP>
+        <LOCATION>CityID2</LOCATION>
+        <KNOWS>
+            <PERSON_ID>PersonID1</PERSON_ID>
+        </KNOWS>
+        <WORK_AT>
+            <NO>
+                <WORK_FROM>2016</WORK_FROM>
+                <COMPANY_ID>CompanyID1</COMPANY_ID>
+            </NO>
+            <NO>
+                <WORK_FROM>2017</WORK_FROM>
+                <COMPANY_ID>CompanyID2</COMPANY_ID>
+            </NO>
+        </WORK_AT>
+    </PERSON>
+
+
+    <FORUM>
+        <FORUM_ID>ForumID1</FORUM_ID>
+        <TITLE>Cars</TITLE>
+        <CREATION_DATE>29-12-2016</CREATION_DATE>
+        <MODERATOR>PersonID1</MODERATOR>
+        <MEMBER>
+            <MEMBER_ID>PersonID1</MEMBER_ID>
+            <MEMBER_SINCE>30-12-2016</MEMBER_SINCE>
+        </MEMBER>
+        <MEMBER>
+            <MEMBER_ID>PersonID2</MEMBER_ID>
+            <MEMBER_SINCE>30-12-2016</MEMBER_SINCE>
+        </MEMBER>
+        <HAS_TAG>TagID1</HAS_TAG>
+        <HAS_TAG>TagID2</HAS_TAG>
+        <POST>
+            <LANGUAGE>English</LANGUAGE>
+            <IMAGE>Car.jpg</IMAGE>
+            <HAS_MESSAGE>MessageID1</HAS_MESSAGE>
+            <HAS_MESSAGE>MessageID2</HAS_MESSAGE>
+        </POST>
+        <POST>
+            <HAS_MESSAGE>MessageID2</HAS_MESSAGE>
+        </POST>
+    </FORUM>
+
+    <MESSAGE>
+        <MESSAGE_ID>MessageID1</MESSAGE_ID>
+        <CREATION_DATE>31-12-2016</CREATION_DATE>
+        <BROWSER_USED>FireFox</BROWSER_USED>
+        <IP>152.125.168.62</IP>
+        <COUNTRY>CountryID1</COUNTRY>
+        <CONTENT>Ja sam vlak sto zgazit cu te mali</CONTENT>
+        <CREATOR>PersonID1</CREATOR>
+        <LIKE>PersonID2</LIKE>
+        <TAG>TagID1</TAG>
+        <TAG>TagID2</TAG>
+        <COMMENT>MessageID2</COMMENT>
+    </MESSAGE>
+
+    <MESSAGE>
+        <MESSAGE_ID>MessageID2</MESSAGE_ID>
+        <CREATION_DATE>31-12-2016</CREATION_DATE>
+        <BROWSER_USED>FireFox</BROWSER_USED>
+        <IP>78.147.168.62</IP>
+        <COUNTRY>CountryID1</COUNTRY>
+        <CONTENT>Zaboravit ces da si hodao</CONTENT>
+        <CREATOR>PersonID2</CREATOR>
+        <LIKE>PersonID1</LIKE>
+        <TAG>TagID1</TAG>
+        <TAG>TagID2</TAG>
+    </MESSAGE>
+
+    <MESSAGE>
+        <MESSAGE_ID>MessageID3</MESSAGE_ID>
+        <CREATION_DATE>31-12-2016</CREATION_DATE>
+        <BROWSER_USED>FireFox</BROWSER_USED>
+        <IP>122.147.168.62</IP>
+        <COUNTRY>CountryID2</COUNTRY>
+        <CONTENT>Da sam cesto trijezan ne bi bio to sto jesam</CONTENT>
+        <CREATOR>PersonID1</CREATOR>
+    </MESSAGE>
+
+    <TAG>
+        <TAG_ID>TagID1</TAG_ID>
+        <NAME>Love</NAME>
+        <HAS_TAG>
+            <TAG_CLASS_ID>TagClassID3</TAG_CLASS_ID>
+        </HAS_TAG>
+    </TAG>
+    <TAG>
+        <TAG_ID>TagID2</TAG_ID>
+        <NAME>Nothing</NAME>
+    </TAG>
+
+    <TAG_CLASS>
+        <TAG_CLASS_ID>TagClassID1</TAG_CLASS_ID>
+        <NAME>Emotion</NAME>
+    </TAG_CLASS>
+    <TAG_CLASS>
+        <TAG_CLASS_ID>TagClassID2</TAG_CLASS_ID>
+        <NAME>Feeling</NAME>
+    </TAG_CLASS>
+    <TAG_CLASS>
+        <TAG_CLASS_ID>TagClassID3</TAG_CLASS_ID>
+        <NAME>Good Feeling</NAME>
+        <SUPER_CLASS>
+            <TAG_CLASS_ID>TagClassID1</TAG_CLASS_ID>
+            <TAG_CLASS_ID>TagClassID2</TAG_CLASS_ID>
+        </SUPER_CLASS>
+    </TAG_CLASS>
+
+
+
+    <!-- UNIVERSITIES AND COMPANIES -->
+    <UNIVERSITY>
+        <UNIVERSITY_ID>UniversityID1</UNIVERSITY_ID>
+        <NAME>University Wrocław</NAME>
+        <CITY_ID>CityID1</CITY_ID>
+    </UNIVERSITY>
+    <UNIVERSITY>
+        <UNIVERSITY_ID>UniversityID2</UNIVERSITY_ID>
+        <NAME>University Zagreb</NAME>
+        <CITY_ID>CityID2</CITY_ID>
+    </UNIVERSITY>
+    <COMPANY>
+        <COMPANY_ID>CompanyID1</COMPANY_ID>
+        <NAME>Konzum</NAME>
+        <COUNTRY_ID>CountryID2</COUNTRY_ID>
+    </COMPANY>
+    <COMPANY>
+        <COMPANY_ID>CompanyID2</COMPANY_ID>
+        <NAME>Valamar</NAME>
+        <COUNTRY_ID>CountryID2</COUNTRY_ID>
+    </COMPANY>
+
+
+    <!-- ALL ABOUT CITIES/COUNTRIES-->
+    <COUNTRY>
+        <COUNTRY_ID>CountryID1</COUNTRY_ID>
+        <NAME>Poland</NAME>
+        <CONTINENT>Europe</CONTINENT>
+    </COUNTRY>
+    <COUNTRY>
+        <COUNTRY_ID>CountryID2</COUNTRY_ID>
+        <NAME>Croatia</NAME>
+        <CONTINENT>Europe</CONTINENT>
+    </COUNTRY>
+
+    <CITY>
+        <CITY_ID>CityID1</CITY_ID>
+        <NAME>Wrocław</NAME>
+        <COUNTRY_ID>CountryID1</COUNTRY_ID>
+    </CITY>
+    <CITY>
+        <CITY_ID>CityID2</CITY_ID>
+        <NAME>Zagreb</NAME>
+        <COUNTRY_ID>CountryID2</COUNTRY_ID>
+    </CITY>
+
+</SOCIAL_NETWORK>
