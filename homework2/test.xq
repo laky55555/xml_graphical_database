@@ -1,7 +1,7 @@
 (: Ivan Lakovic :)
 
 (: 1. the titles of all scenes and acts of the tragedy in the document order; :)
-let $q1 := fn:doc("r_and_j.xml")//ACT/TITLE|fn:doc("r_and_j.xml")//SCENE/TITLE
+let $q1 := fn:doc("r_and_j.xml")//(ACT|SCENE)/TITLE
 
 (: 2. the list of all persons that speak in the first and the third scene of the third act; :)
 let $q2 := distinct-values(fn:doc("r_and_j.xml")//ACT[position()=3]/SCENE[position()=1 or position() = 3]//SPEAKER)
@@ -43,7 +43,7 @@ let $q12 := fn:doc("r_and_j.xml")//SCENE/(SPEECH[./SPEAKER = "JULIET"]/LINE)[las
 let $q13 := fn:doc("r_and_j.xml")//SCENE/(SPEECH[./SPEAKER = "ROMEO"]/LINE)[1]
 
 (: 14. how many times Juliet speaks directly after Romeo speaks  (according to SPEECH elements); :)
-let $q14 := count(fn:doc("r_and_j.xml")//SPEECH[(./SPEAKER = "ROMEO" and following-sibling::SPEECH/SPEAKER = "JULIET")])
+let $q14 := count(fn:doc("r_and_j.xml")//SPEECH[(./SPEAKER = "ROMEO" and following-sibling::SPEECH[1]/SPEAKER = "JULIET")])
 
 (: 15. how many times Romeo speaks in the scenes where Juliet speaks (according to LINE elements); :)
 let $q15 := count(fn:doc("r_and_j.xml")//SCENE[.//SPEAKER = "JULIET"]//SPEAKER[. = "ROMEO"]/following-sibling::LINE)
@@ -60,5 +60,5 @@ let $q18 := distinct-values(fn:doc("r_and_j.xml")//(SCENE//SPEAKER)[(. = "ROMEO"
 
 
 return <double>
-{$q3}
+{$q14}
 </double>
