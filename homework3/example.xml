@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOCIAL_NETWORK>
+    <PERSON ID="PersonID1" CREATION_DATE="2016-10-27">
+        <FIRST_NAME>Johny</FIRST_NAME>
+        <LAST_NAME>Deep</LAST_NAME>
+        <GENDER>MALE</GENDER>
+        <BIRTHDAY>1980-12-18</BIRTHDAY>
+        <EMAIL>
+            <NO>mo-je@ime.com</NO>
+            <NO>moje.ime@ime.com</NO>
+        </EMAIL>
+        <SPEAKS>
+            <NO>English</NO>
+            <NO>Polish</NO>
+        </SPEAKS>
+        <BROWSER>FireFox</BROWSER>
+        <IP>154.124.135.2</IP>
+        <LOCATION CITY="CityID1" />
+        <KNOWS>
+            <FRIEND PERSON="PersonID2" SINCE="2016-10-28"/>
+        </KNOWS>
+        <STUDY_AT UNIVERSITY="UniversityID1" CLASS="2015" />
+    </PERSON>
+    <PERSON ID="PersonID2" CREATION_DATE="2016-10-27">
+        <FIRST_NAME>Natalie</FIRST_NAME>
+        <LAST_NAME>Dormer</LAST_NAME>
+        <GENDER>FEMALE</GENDER>
+        <BIRTHDAY>1985-12-11</BIRTHDAY>
+        <EMAIL>
+            <NO>natalie@dormer.com</NO>
+        </EMAIL>
+        <SPEAKS>
+            <NO>English</NO>
+            <NO>Croatian</NO>
+        </SPEAKS>
+        <BROWSER>FireFox</BROWSER>
+        <IP>114.126.175.45</IP>
+        <LOCATION CITY="CityID2" />
+        <KNOWS>
+            <FRIEND PERSON="PersonID1" SINCE="2016-10-28"/>
+        </KNOWS>
+        <WORK_AT COMPANY="CompanyID1" SINCE="2016" />
+        <WORK_AT COMPANY="CompanyID2" SINCE="2017" />
+    </PERSON>
+
+
+     <FORUM ID="ForumID1" CREATION_DATE="2016-12-29">
+        <TITLE>Cars</TITLE>
+        <MODERATOR PERSON="PersonID1" />
+        <MEMBER PERSON="PersonID1" MEMBER_SINCE="2016-12-30"/>
+        <MEMBER PERSON="PersonID2" MEMBER_SINCE="2016-12-30"/>
+        <HAS_TAG TAG_ID="TagID1" />
+        <HAS_TAG TAG_ID="TagID2" />
+        <POST>
+            <LANGUAGE>English</LANGUAGE>
+            <IMAGE>Car.jpg</IMAGE>
+            <HAS_MESSAGE MESSAGE="MessageID1" />
+            <HAS_MESSAGE MESSAGE="MessageID2" />
+        </POST>
+        <POST>
+            <HAS_MESSAGE MESSAGE="MessageID3" />
+        </POST>
+    </FORUM>
+
+    <MESSAGE ID="MessageID1" CREATION_DATE="2016-12-31" CREATOR="PersonID1" COUNTRY="CountryID1">
+        <BROWSER_USED>FireFox</BROWSER_USED>
+        <IP>152.125.168.62</IP>
+        <CONTENT>Ja sam vlak sto zgazit cu te mali</CONTENT>
+        <LIKE PERSON="PersonID2" />
+        <TAG TAG_ID="TagID1" />
+        <TAG TAG_ID="TagID2" />
+        <COMMENT MESSAGE_ID="MessageID2" />
+    </MESSAGE>
+
+    <MESSAGE ID="MessageID2" CREATION_DATE="2016-12-31" CREATOR="PersonID2" COUNTRY="CountryID1">
+        <BROWSER_USED>FireFox</BROWSER_USED>
+        <IP>78.147.168.62</IP>
+        <CONTENT>Zaboravit ces da si hodao</CONTENT>
+        <LIKE PERSON="PersonID1" />
+        <TAG TAG_ID="TagID1" />
+        <TAG TAG_ID="TagID2" />
+    </MESSAGE>
+
+    <MESSAGE ID="MessageID3" CREATION_DATE="2016-12-31" CREATOR="PersonID1" COUNTRY="CountryID2">
+        <BROWSER_USED>FireFox</BROWSER_USED>
+        <IP>122.147.168.62</IP>
+        <CONTENT>Da sam cesto trijezan ne bi bio to sto jesam</CONTENT>
+    </MESSAGE>
+
+
+    <TAG ID="TagID1">
+        <NAME>Love</NAME>
+        <TAG_CLASS_ID CLASS_ID="TagClassID3" />
+    </TAG>
+    <TAG ID="TagID2">
+        <NAME>Nothing</NAME>
+    </TAG>
+
+    <TAG_CLASS ID="TagClassID1">
+        <NAME>Emotion</NAME>
+    </TAG_CLASS>
+    <TAG_CLASS ID="TagClassID2">
+        <NAME>Feeling</NAME>
+    </TAG_CLASS>
+    <TAG_CLASS ID="TagClassID3">
+        <NAME>Good Feeling</NAME>
+        <!-- if this class has super classes -->
+        <TAG_CLASS_ID CLASS_ID="TagClassID1" />
+        <TAG_CLASS_ID CLASS_ID="TagClassID2" />
+    </TAG_CLASS>
+
+
+    <UNIVERSITY ID="UniversityID1" CITY="CityID1">
+        <NAME>University Wrocław</NAME>
+    </UNIVERSITY>
+    <UNIVERSITY ID="UniversityID1" CITY="CityID2">
+        <NAME>University Zagreb</NAME>
+    </UNIVERSITY>
+
+    <COMPANY ID="CompanyID1" COUNTRY="CountryID2">
+        <NAME>Konzum</NAME>
+    </COMPANY>
+    <COMPANY ID="CompanyID2" COUNTRY="CountryID2">
+        <NAME>Valamar</NAME>
+    </COMPANY>
+
+    <COUNTRY ID="CountryID1" CONTINENT="Europe">
+        <NAME>Poland</NAME>
+    </COUNTRY>
+    <COUNTRY ID="CountryID2" CONTINENT="Europe">
+        <NAME>Croatia</NAME>
+    </COUNTRY>
+
+    <CITY ID="CityID1" COUNTRY="CountryID1">
+        <NAME>Wrocław</NAME>
+    </CITY>
+    <CITY ID="CityID2" COUNTRY="CountryID1">
+        <NAME>Zagreb</NAME>
+    </CITY> 
+
+</SOCIAL_NETWORK>

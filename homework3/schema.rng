@@ -1,0 +1,130 @@
+start = network
+
+network = element SOCIAL_NETWORK {
+	person*,
+	forum*,
+	message*,
+	tag*,
+	tag_class*,
+	university*,
+	company*,
+	country*,
+	city*
+}
+
+person = element PERSON {
+	attribute ID { xsd:string { pattern ="PersonID\d+" } },
+	creation_date,
+	element FIRST_NAME { text },
+	element LAST_NAME { text },
+	element GENDER { "FEMALE" | "MALE" },
+	element BIRTHDAY { xsd:date {minInclusive="1901-01-01"} },
+	element EMAIL {
+		element NO { xsd:string { pattern ="[a-z0-9_.\-]+@[a-z0-9\-]+.[a-z0-9]+" } }+
+	},
+	element SPEAKS {
+		element NO { text }+
+	},
+	element BROWSER { text },
+	element IP { text },
+	element LOCATION {
+		attribute CITY { xsd:string { pattern ="CityID\d+" } }
+	},
+	element KNOWS {
+		element FRIEND {
+			attribute PERSON { xsd:string { pattern ="PersonID\d+" } },
+			attribute SINCE { xsd:date }
+		}*
+	}*,
+	element STUDY_AT {
+		attribute UNIVERSITY { xsd:string { pattern ="UniversityID\d+" } },
+		attribute CLASS { xsd:gYear {minInclusive="1950"} }
+	}*,
+	element WORK_AT {
+		attribute COMPANY { xsd:string { pattern ="CompanyID\d+" } },
+		attribute SINCE { xsd:gYear {minInclusive="1950"} }
+	}*
+}
+
+forum = element FORUM {
+	attribute ID { xsd:string { pattern ="ForumID\d+" } },
+	creation_date,
+	element TITLE { text },
+	element MODERATOR { person_att },
+	element MEMBER { person_att,
+		attribute MEMBER_SINCE { xsd:date }
+	}*,
+	element HAS_TAG {
+		attribute TAG_ID { xsd:string { pattern ="TagID\d+" } }
+	}*,
+	element POST {
+		element LANGUAGE { text }*,
+		element IMAGE { text }*,
+		element HAS_MESSAGE {
+			attribute MESSAGE { xsd:string { pattern ="MessageID\d+" } }
+		}*
+	}+
+
+}
+
+message = element MESSAGE {
+	attribute ID { xsd:string { pattern ="MessageID\d+" } },
+	creation_date,
+	attribute CREATOR { xsd:string { pattern ="PersonID\d+" } },
+	country_att,
+	element BROWSER_USED { text },
+	element IP { text },
+	element CONTENT { text },
+	element LIKE { person_att }*,
+	element TAG {
+		attribute TAG_ID { xsd:string { pattern ="TagID\d+" } }
+	}*,
+	element COMMENT {
+		attribute MESSAGE_ID { xsd:string { pattern ="MessageID\d+" } }
+	}*
+
+}
+
+tag = element TAG {
+	attribute ID { xsd:string { pattern ="TagID\d+" } },
+	element NAME { text },
+	element TAG_CLASS_ID {
+		attribute CLASS_ID { xsd:string { pattern ="TagClassID\d+" } }
+	}*
+}
+
+tag_class = element TAG_CLASS {
+	attribute ID { xsd:string { pattern ="TagClassID\d+" } },
+	element NAME { text },
+	element TAG_CLASS_ID {
+		attribute CLASS_ID { xsd:string { pattern ="TagClassID\d+" } }
+	}*
+}
+
+university = element UNIVERSITY {
+	attribute ID { xsd:string { pattern ="UniversityID\d+" } },
+	attribute CITY { xsd:string { pattern ="CityID\d+" } },
+	element NAME { text }
+}
+
+company = element COMPANY {
+	attribute ID { xsd:string { pattern ="CompanyID\d+" } },
+	country_att,
+	element NAME { text }
+}
+
+country = element COUNTRY {
+	attribute ID { xsd:string { pattern ="CountryID\d+" } },
+	attribute CONTINENT { "Europe" | "Asia" | "Africa" | "North America" | "South America" | "Antarctica" | "Australia" },
+	element NAME { text }
+}
+
+city = element CITY {
+	attribute ID { xsd:string { pattern ="CityID\d+" } },
+	country_att,
+	element NAME { text }
+}
+
+person_att = attribute PERSON { xsd:string { pattern ="PersonID\d+" } }
+creation_date = attribute CREATION_DATE { xsd:date }
+country_att = attribute COUNTRY { xsd:string { pattern ="CountryID\d+" } }
