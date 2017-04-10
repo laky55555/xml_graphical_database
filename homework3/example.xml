@@ -113,7 +113,7 @@
     <UNIVERSITY ID="UniversityID1" CITY="CityID1">
         <NAME>University Wrocław</NAME>
     </UNIVERSITY>
-    <UNIVERSITY ID="UniversityID1" CITY="CityID2">
+    <UNIVERSITY ID="UniversityID2" CITY="CityID2">
         <NAME>University Zagreb</NAME>
     </UNIVERSITY>
 
@@ -136,6 +136,6 @@
     </CITY>
     <CITY ID="CityID2" COUNTRY="CountryID1">
         <NAME>Zagreb</NAME>
-    </CITY> 
+    </CITY>
 
 </SOCIAL_NETWORK>
