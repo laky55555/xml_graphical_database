@@ -5,3 +5,6 @@ Prepare a schema for your version of social network markup language from Task 1 
 Use DTD (6 points) or XML Schema/Relax NG compact syntax (10 points).
 
 Send two files: XML file - a document instance and DTD/XSD/RNC file - the schema.
+
+[USAGE]: jing [-cfit] [-e encoding] rng-file [xml-file...]
+eg.jing -ct schema.rng example.xml

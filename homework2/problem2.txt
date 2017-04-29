@@ -21,4 +21,10 @@ Write XPath queries that return
 18. the list of persons that speak at least once directly before Romeo (in the same scene).
 
 
-Send one *.xq file containing all your queries. 
+Send one *.xq file containing all your queries.
+
+
+[USAGE]: saxonb-xquery [OPTION...] QUERYFILE [NAME=VALUE...]
+eg. saxonb-xquery test.xq
+eg. saxonb-xquery -o:output.xml -wrap:on test.xq
+[NOTE]: if you use wrap you can just write query, don't need to put it into node to be valid xml.
