@@ -1,0 +1,14 @@
+Task 4 (deadline 8.05.2017, 10 points)
+
+The file  dblp_ii.xml contains the list of scientific publications of a number of employees of our institute. (according to the schema dblp.dtd). The file names.xml contains the list of the names of the employees.
+
+Send a single file with an XSLT  stylesheet that outputs:
+
+    1) the HTML page  (index.html) with  a table containing for each employee the row with her/his firstname, lastname, the number of her/his publications and the link to the page listing the publications (see next item);
+    2) for each employee the page  (in the separate file named firstname_lastname.html) with a table that contains the list of her/his publications ordered by the year of publication. Each publication in the list should  be described by the names of co-authors, the title of the publication,  the name of the conference/journal and the year. The name of each of the co-authors should link to the page produced for this co-author.  The title of each publication should link to the electronic version of the paper (according to the ee element). The name of the conference/journal should link to the page produced for the conference/journal (see the next item);
+    3) for each conference/journal the page  containing the list of publications in the conference/journal (for all years).
+
+Hint: use xsl:result-document. The element inproceedings describes a conference publication,  the element article describes a journal publication.
+
+[USAGE]: saxonb-xslt [OPTION...] [-s:SOURCEFILE] [-xsl:STYLESHEET] [-o:OUTPUT] [NAME=VALUE...]
+eg. saxonb-xslt -ext:on -xsl:xslt_stylesheet.xsl -it:main
