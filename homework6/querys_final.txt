@@ -1,0 +1,52 @@
+1. Find all persons connected by a path along KNOWS relationships to "JoseAlonso"
+MATCH path = shortestpath((person:Person)-[:KNOWS*1..87]-(jose:Person{name:'JoseAlonso'})) WHERE NOT person = jose
+return person, length(path)
+
+2. Find all persons connected by a path along KNOWS relationships to "JoseAlonso" such that they have liked any of  "JoseAlonso" posts. Return each of those persons with the length of the path.
+MATCH (person:Person)-[:LIKES]->(:Post)-[:hasCreator]-(jose:Person{name:'JoseAlonso'}) 
+WITH DISTINCT person, jose
+MATCH path = shortestpath((person)-[:KNOWS*1..87]-(jose)) 
+return person, length(path)
+
+3. List all person names with the continent name they are located in (e.g.,   "JoseAlonso", "North_America")
+MATCH (person:Person)-[:isLocatedIn|:isPartOf*3]-(place:Place{type:'continent'})
+return person.name, place.name
+
+4. How many persons (in the database)  live in Europe?
+MATCH (person:Person)-[:isLocatedIn|:isPartOf*3]-(place:Place{name:'Europe'})
+return count(person)
+
+5.Return the number of persons that are located in each city provided the number is greater that 1.  
+MATCH (person:Person)-[:isLocatedIn]-(city:Place{type:'city'})
+WITH city, count(person) AS population
+WHERE population > 1
+return city, population
+
+6. We say that two persons are potential friends if there is a person they both know.   Return for a person a list of cities where their potential friends are located in and the length of that list. Return 10 persons  with the longest lists ordered by the length.
+MATCH p = (person:Person)-[:KNOWS]-(:Person)-[:KNOWS]-(potential_friend:Person)-[:isLocatedIn]-(city:Place) WHERE NOT (person)-[:KNOWS]-(potential_friend)
+RETURN person, collect(DISTINCT city.name), size(collect(DISTINCT city.name)) as number_of_cities
+ORDER BY number_of_cities DESC LIMIT 10
+
+7. Add for each pair of potential friends a direct relationship (in any direction): potential_friends
+WE NEED EXTRA CONDITION ID SO WE DONT ADD MULTIPLE CONNECTIONS BETWEEN THE SAME PEOPLE IF WE WANT DIRECTED CONNECTIONS
+MATCH (person1:Person)-[:KNOWS]-(person2:Person)-[:KNOWS]-(potential_friend:Person) WHERE NOT (person1)-[:KNOWS]-(potential_friend) AND ID(person1) < ID(potential_friend)
+MERGE (person1)-[:POTENTIAL_FRIENDS]->(potential_friend)
+
+8. For each person (other that "AkiraYamamoto") that  has liked a post by "AkiraYamamoto" find all the shortest paths connecting the person to "AkiraYamamoto" through KNOWS relationships. Return tuples of the form: the person name, the length of the path and the list of the person names on that path.  // Hint: you can use allShortestPaths function
+MATCH (person:Person)-[:LIKES]->(:Post)-[:hasCreator]-(akira:Person{name:'AkiraYamamoto'}) 
+WITH DISTINCT person, akira
+MATCH path = allShortestPaths((person)-[:KNOWS*1..87]-(akira)) WHERE NOT person = akira
+return person.name, length(path), extract(x IN nodes(path) | x.name)
+
+9. Modify the previous query to consider only paths from males that go to "AkiraYamamoto" through females only.
+MATCH (person:Person{gender: 'male'})-[:LIKES]->(:Post)-[:hasCreator]-(akira:Person{name:'AkiraYamamoto'})
+WITH DISTINCT person, akira
+MATCH path = allShortestPaths((person)-[:KNOWS*..9]-(akira)) WHERE NOT person = akira AND ALL(x IN nodes(path) WHERE x = person OR x.gender = "female")
+return person.name, length(path), extract(x IN nodes(path) | x.name)
+
+10. Find all paths along KNOWS relationships between  "AkiraYamamoto"   and "KenYamada" that are of length <= 5. For each of the paths return the  length of the path and the  number of edges created after '2011-06-12' along that path.   
+MATCH (n1:Person{name: 'KenYamada'}), (n2:Person{name:'AkiraYamamoto'}), 
+path = (n1)-[:KNOWS*1..5]-(n2)
+WITH DISTINCT n1, n2, path, filter(x IN relationships(path) WHERE x.creationDate > '2011-06-12') as relations_date
+RETURN length(path), extract(x IN nodes(path) | x.name) as path_list, size(relations_date)
+ORDER BY path_list
