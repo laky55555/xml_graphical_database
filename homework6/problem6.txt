@@ -1,0 +1,54 @@
+Loading csv data
+
+There are at least two  method of loading csv data into Neo4j. You have to either specify commands like those below or use automatic import tool neo4j-import but then you have to preprocess the csv files in a special way (setting up parameters for the id's, relationship starts, ends, types etc.).
+
+The following commands load a fragment of LDBC data into Neo4j:
+
+LOAD CSV FROM 'http://www.ii.uni.wroc.pl/~piotrek/neo4j/person.csv' AS line FIELDTERMINATOR '|'
+MERGE (:Person { id: line[0], name: (line[1] + line[2]), gender: line[3], birthday: line[4], creationDate: line[5] } );
+
+LOAD CSV FROM 'http://www.ii.uni.wroc.pl/~piotrek/neo4j/person_knows_person.csv' AS line FIELDTERMINATOR '|'
+MATCH (p1:Person {id: line[0]})
+MATCH (p2:Person {id: line[1]})
+MERGE (p1) -[:KNOWS {creationDate:line[2]}]->(p2)
+
+LOAD CSV FROM 'http://www.ii.uni.wroc.pl/~piotrek/neo4j/post.csv' AS line FIELDTERMINATOR '|'
+MERGE (:Post { id: line[0], creationDate: line[2] } );
+
+LOAD CSV FROM 'http://www.ii.uni.wroc.pl/~piotrek/neo4j/person_likes_post.csv' AS line FIELDTERMINATOR '|'
+MATCH (p1:Person {id: line[0]})
+MATCH (p2:Post {id: line[1]})
+MERGE (p1) -[:LIKES {creationDate:line[2]}]->(p2)
+
+LOAD CSV FROM 'http://www.ii.uni.wroc.pl/~piotrek/neo4j/post_hasCreator_person.csv' AS line FIELDTERMINATOR '|'
+MATCH (p1:Post {id: line[0]})
+MATCH (p2:Person {id: line[1]})
+MERGE (p1) -[:hasCreator ]->(p2)
+
+LOAD CSV FROM 'http://www.ii.uni.wroc.pl/~piotrek/neo4j/place.csv' AS line FIELDTERMINATOR '|'
+MERGE (p:Place {id: line[0], name: line[1], type: line[3]})
+
+LOAD CSV FROM 'http://www.ii.uni.wroc.pl/~piotrek/neo4j/place_isPartOf_place.csv' AS line FIELDTERMINATOR '|'
+MATCH (p1:Place {id: line[0]})
+MATCH (p2:Place {id: line[1]})
+MERGE (p1) -[:isPartOf ]->(p2)
+
+LOAD CSV FROM 'http://www.ii.uni.wroc.pl/~piotrek/neo4j/person_isLocatedIn_place.csv' AS line FIELDTERMINATOR '|'
+MATCH (p1:Person {id: line[0]})
+MATCH (p2:Place {id: line[1]})
+MERGE (p1) -[:isLocatedIn ]->(p2)
+
+Task description
+
+Find all persons connected by a path along KNOWS relationships to "JoseAlonso"
+Find all persons connected by a path along KNOWS relationships to "JoseAlonso" such that they have liked any of  "JoseAlonso" posts. Return each of those persons with the length of the path.
+List all person names with the continent name they are located in (e.g.,   "JoseAlonso", "North_America")
+How many persons (in the database)  live in Europe?
+Return the number of persons that are located in each city provided the number is greater that 1.
+We say that two persons are potential friends if there is a person they both know.   Return for a person a list of cities where their potential friends are located in and the length of that list. Return 10 persons  with the longest lists ordered by the length.
+Add for each pair of potential friends a direct relationship (in any direction): potential_friends
+For each person (other that "AkiraYamamoto") that  has liked a post by "AkiraYamamoto" find all the shortest paths connecting the person to "AkiraYamamoto" through KNOWS relationships. Return tuples of the form: the person name, the length of the path and the list of the person names on that path.  // Hint: you can use allShortestPaths function
+Modify the previous query to consider only paths from males that go to "AkiraYamamoto" through females only.
+ Find all paths along KNOWS relationships between  "AkiraYamamoto"   and "KenYamada" that are of length <= 5. For each of the paths return the  length of the path and the  number of edges created after '2011-06-12' along that path. 
+
+

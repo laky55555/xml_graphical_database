@@ -1,4 +1,4 @@
-What is difference between: 
+What is difference between:
 MATCH ... MATCH ...
 	and
 MATCH ..., ...
@@ -12,9 +12,9 @@ MATCH path = shortestpath((person:Person)-[:KNOWS*1..87]-(jose:Person{name:'Jose
 return person, length(path)
 
 2. Find all persons connected by a path along KNOWS relationships to "JoseAlonso" such that they have liked any of  "JoseAlonso" posts. Return each of those persons with the length of the path.
-MATCH (person:Person)-[:LIKES]->(:Post)-[:hasCreator]-(jose:Person{name:'JoseAlonso'}) 
+MATCH (person:Person)-[:LIKES]->(:Post)-[:hasCreator]-(jose:Person{name:'JoseAlonso'})
 WITH DISTINCT person, jose
-MATCH path = shortestpath((person)-[:KNOWS*1..87]-(jose)) 
+MATCH path = shortestpath((person)-[:KNOWS*1..87]-(jose))
 return person, length(path)
 
 3. List all person names with the continent name they are located in (e.g.,   "JoseAlonso", "North_America")
@@ -35,7 +35,7 @@ return person.name, place.name
 MATCH (person:Person)-[:isLocatedIn|:isPartOf*3]-(place:Place{name:'Europe'})
 return count(person)
 
-5.Return the number of persons that are located in each city provided the number is greater that 1.  
+5.Return the number of persons that are located in each city provided the number is greater that 1.
 MATCH (person:Person)-[:isLocatedIn]-(city:Place{type:'city'})
 WITH city, count(person) AS population
 WHERE population > 1
@@ -63,7 +63,7 @@ MATCH (person1:Person)-[:KNOWS]-(person2:Person)-[:KNOWS]-(potential_friend:Pers
 MERGE (person1)-[:POTENTIAL_FRIENDS]-(potential_friend)
 
 8. For each person (other that "AkiraYamamoto") that  has liked a post by "AkiraYamamoto" find all the shortest paths connecting the person to "AkiraYamamoto" through KNOWS relationships. Return tuples of the form: the person name, the length of the path and the list of the person names on that path.  // Hint: you can use allShortestPaths function
-MATCH (person:Person)-[:LIKES]->(:Post)-[:hasCreator]-(akira:Person{name:'AkiraYamamoto'}) 
+MATCH (person:Person)-[:LIKES]->(:Post)-[:hasCreator]-(akira:Person{name:'AkiraYamamoto'})
 WITH DISTINCT person, akira
 MATCH path = allShortestPaths((person)-[:KNOWS*1..87]-(akira)) WHERE NOT person = akira
 return person.name, length(path), extract(x IN nodes(path) | x.name)
@@ -74,8 +74,8 @@ WITH DISTINCT person, akira
 MATCH path = allShortestPaths((person)-[:KNOWS*..9]-(akira)) WHERE NOT person = akira AND ALL(x IN nodes(path) WHERE x = person OR x.gender = "female")
 return person.name, length(path), extract(x IN nodes(path) | x.name)
 
-10. Find all paths along KNOWS relationships between  "AkiraYamamoto"   and "KenYamada" that are of length <= 5. For each of the paths return the  length of the path and the  number of edges created after '2011-06-12' along that path.   
-MATCH (n1:Person{name: 'KenYamada'}), (n2:Person{name:'AkiraYamamoto'}), 
+10. Find all paths along KNOWS relationships between  "AkiraYamamoto"   and "KenYamada" that are of length <= 5. For each of the paths return the  length of the path and the  number of edges created after '2011-06-12' along that path.
+MATCH (n1:Person{name: 'KenYamada'}), (n2:Person{name:'AkiraYamamoto'}),
 path = (n1)-[:KNOWS*1..5]-(n2)
 WITH DISTINCT n1, n2, path, filter(x IN relationships(path) WHERE x.creationDate > '2011-06-12' ) as relations_date
 RETURN length(path), extract(x IN nodes(path) | x.name) as path_list, size(relations_date)
